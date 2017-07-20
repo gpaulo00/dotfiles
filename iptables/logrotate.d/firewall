@@ -1,0 +1,12 @@
+/var/log/firewall/*.log{
+    daily
+    missingok
+    rotate 10
+    compress
+    size 10M
+    create 600 root adm
+    notifempty
+    postrotate
+        invoke-rc.d rsyslog rotate > /dev/null
+    endscript
+}
