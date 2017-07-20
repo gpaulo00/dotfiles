@@ -1,0 +1,37 @@
+[ui]
+verbose = True
+username = Gustavo Paulo <gustavo.paulo.segura@gmail.com>
+ssh = ssh -C
+commitsubrepos = false
+merge = meld
+
+[extensions]
+hgext.bookmarks =
+prompt = /opt/src/hg-prompt/prompt.py
+color =
+hggit =
+fetch =
+pager =
+histedit =
+mq =
+rebase =
+shelve =
+hgsubversion = /opt/src/hgsubversion/hgsubversion
+purge =
+convert =
+
+
+[color]
+status.modified = magenta bold
+status.added = green bold
+status.removed = red bold
+status.deleted = cyan bold
+status.unknown = blue bold
+status.ignored = black bold
+
+[pager]
+pager = LESS='FRX' less
+
+
+[tortoisehg]
+vdiff = meld
