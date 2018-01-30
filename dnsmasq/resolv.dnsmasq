@@ -1,0 +1,7 @@
+
+# Gustavo Paulo <gustavo.paulo.segura@gmail.com>
+# upstream dns servers for dnsmasq
+
+# Google's DNS server
+nameserver 8.8.8.8
+nameserver 8.8.4.4
