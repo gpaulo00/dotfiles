@@ -1,7 +1,0 @@
-default_storage = postgres://name:password@localhost
-limit_ncpus = 0
-rpc_announce = false
-rpc_announce_broadcast = false
-rpc_knownclients = 192.168.1.101
-rpc_server = false
-workunit_size = 1000

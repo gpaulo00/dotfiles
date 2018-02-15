@@ -26,7 +26,7 @@ POWERLEVEL9K_SHORTEN_DELIMITER=""
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 
 # general
-POWERLEVEL9K_MODE='awesome-patched'
+POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_STATUS_VERBOSE="false"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon root_indicator dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
@@ -49,12 +49,12 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="${EDITOR} ~/.zshrc"
 alias ohmyzsh="${EDITOR} ~/.oh-my-zsh"
 
-# Go & Java
+# programming languagues (Go, Java, JavaScript, Rust)
 export GOPATH=$(go env GOPATH)
 export PATH=$PATH:/usr/lib/go-tip/bin:$GOPATH/bin
+export PATH=$PATH:$HOME/.cargo/bin
 export JAVA_HOME="/usr/lib/jvm/java-8-oracle/"
 
-# NVM
 export NVM_DIR="$(realpath $HOME)/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"

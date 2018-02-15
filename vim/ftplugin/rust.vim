@@ -1,0 +1,3 @@
+
+" automatic rustfmt
+let g:rustfmt_autosave = 1
