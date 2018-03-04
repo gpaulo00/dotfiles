@@ -16,6 +16,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'jeetsukumaran/vim-buffergator', { 'on': 'BuffergatorToggle' }
+Plug 'godlygeek/tabular'
 
 """ styling
 Plug 'sjl/badwolf'
@@ -31,6 +32,7 @@ Plug 'zchee/deoplete-go', { 'do': 'make', 'for': 'go' }
 Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh', 'for': 'go' }
 Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 call plug#end()
 
 "" some fixes (NERDTree)
@@ -68,6 +70,10 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+"" configs
+let g:deoplete#enable_at_startup = 1
+let g:vim_markdown_folding_disabled = 1
+
 "" syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -86,3 +92,14 @@ let g:airline#extensions#tabline#enabled = 1
 map <C-n> :NERDTreeToggle<CR>
 map <F8> :TagbarToggle<CR>
 map <leader>b :BuffergatorToggle<CR>
+map <ESC> :noh<CR>
+
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>ga :Gcommit --amend<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gl :Git glog<CR>
+
+"" crystal filetype
+augroup filetypedetect
+  au BufRead,BufNewFile *.cr setfiletype crystal
+augroup END
