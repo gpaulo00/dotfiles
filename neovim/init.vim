@@ -12,11 +12,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-syntastic/syntastic'
-Plug 'jeetsukumaran/vim-buffergator', { 'on': 'BuffergatorToggle' }
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
 
@@ -37,7 +35,7 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'HerringtonDarkholme/yats.vim'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 "" some fixes (NERDTree)
@@ -93,15 +91,20 @@ let g:syntastic_aggregate_errors = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='badwolf'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#syntastic#enabled = 1
 
 "" shortcuts
 " ,cl = comment, ,ci = uncomment
-map <C-n> :NERDTreeToggle<CR>
-map <F8> :TagbarToggle<CR>
-map <leader>b :BuffergatorToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
+nnoremap <leader>p :FZF<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>w :Windows<CR>
 
 nnoremap <leader>vr :so $MYVIMRC<CR>
-nnoremap <leader>ve :e $MYVIMRC<CR>
+nnoremap <leader>ve :tabe $MYVIMRC<CR>
 
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
@@ -119,8 +122,8 @@ augroup filetypedetect
   au BufRead,BufNewFile *.cr setfiletype crystal
 augroup END
 
-"" oni
-if exists("g:gui_oni")
-  let g:airline#extensions#tabline#enabled = 0
-  set showtabline=0
-endif
+""" fzf
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+

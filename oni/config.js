@@ -6,9 +6,6 @@
 
 const activate = oni => {
     console.log("config activated")
-    console.log(
-        document.getSelection("#host > div > div:nth-child(2) > div > div.container.full > div:nth-child(1) > div > div > div.dock.container.fixed.horizontal")
-    )
 }
 
 const deactivate = () => {
@@ -21,9 +18,11 @@ module.exports = {
     "oni.loadInitVim": true,
     "autoClosingPairs.enabled": true,
     "editor.fontFamily": "Knack Nerd Font",
+    "editor.fontSize": "14px",
     "ui.colorscheme": "badwolf",
     "ui.animations.enabled": true,
 
+    "tabs.mode": "native",
     "oni.hideMenu": true,
     "oni.useDefaultConfig": false,
     "sidebar.enabled": false,
