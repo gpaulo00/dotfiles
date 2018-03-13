@@ -1,8 +1,8 @@
 
 # information about the installer
-version: "1.0"
 author: Gustavo Paulo <gustavo.paulo.segura@gmail.com>
 system: Ubuntu GNU/Linux
+packageManager: apt
 
 # common dependencies
 dependencies:
@@ -27,8 +27,8 @@ packages:
       - cp -r $(pwd)/fonts $HOME/.local/share
       - fc-cache -vf
       # vcs
-      - mv $HOME/.gitconfig{,bak} || true
-      - mv $HOME/.hgrc{,bak} || true
+      - mv $HOME/.gitconfig{,.bak} || true
+      - mv $HOME/.hgrc{,.bak} || true
       - ln -s $(pwd)/vcs/gitconfig $HOME/.gitconfig
       - ln -s $(pwd)/vcs/hgrc $HOME/.hgrc
       # zsh config
@@ -51,8 +51,8 @@ packages:
     configure:
       - curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
           https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      - mv $HOME/.config/nvim{,bak} || true
-      - mv $HOME/.oni{,bak} || true
+      - mv $HOME/.config/nvim{,.bak} || true
+      - mv $HOME/.oni{,.bak} || true
       - ln -s $(pwd)/neovim $HOME/.config/nvim
       - ln -s $(pwd)/oni $HOME/.oni
       - nvim -c 'PlugInstall' -c 'qa!'
@@ -79,7 +79,7 @@ packages:
       - inkscape
 
   elixir:
-    description: install elixir language
+    description: elixir development
     categories:
       - languages
     preinstall:
@@ -91,7 +91,7 @@ packages:
       - elixir
 
   java:
-    description: install oracle java
+    description: install oracle java 8
     categories:
       - languages
     preinstall:
@@ -103,7 +103,7 @@ packages:
       - maven
 
   scala:
-    description: install scala language
+    description: scala development
     categories:
       - languages
     preinstall:
@@ -116,7 +116,7 @@ packages:
       - sbt
 
   crystal:
-    description: install crystal language
+    description: crystal development
     categories:
       - languages
     preinstall:
@@ -129,7 +129,7 @@ packages:
       - libyaml-dev
 
   nodejs:
-    description: install nodejs
+    description: node.js development
     categories:
       - languages
     preinstall:
@@ -138,32 +138,35 @@ packages:
       - curl -o- -L https://yarnpkg.com/install.sh | bash
     install:
       yarn:
-        - @angular/cli
+        - "@angular/cli"
         - create-react-app
         - vue-cli
         - typescript
         - tslint
         - eslint
+    build:
+      git:
+        - https://github.com/SuperPaintman/crystal-ctags
 
   hacking:
-    description: install hacking tools
+    description: some hacking tools
     categories:
       - default
     dependencies:
       - build-essential
       - libpcap-dev
     install:
-      - nmap
-      - aircrack-ng
+      apt:
+        - nmap
+        - aircrack-ng
+      gem:
+        - bettercap
     build:
       git:
         - https://github.com/aanarchyy/bully
-    install:
-      gem:
-        - bettercap
 
   nat-network:
-    description: share network connection (configuration)
+    description: shared network config
     configure:
       - mv /etc/dnsmasq.conf{,.bak} || true
       - mv /etc/resolv.conf{,.bak} || true

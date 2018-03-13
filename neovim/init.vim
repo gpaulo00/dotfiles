@@ -17,6 +17,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 """ styling
 Plug 'sjl/badwolf'
@@ -35,7 +37,6 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 "" some fixes (NERDTree)
@@ -74,6 +75,7 @@ endif
 
 "" configs
 let g:deoplete#enable_at_startup = 1
+
 let g:vim_markdown_folding_disabled = 1
 let g:NERDSpaceDelims = 1
 
@@ -94,11 +96,16 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#syntastic#enabled = 1
+if &term =~ 'linux'
+  let g:airline_powerline_fonts = 0
+endif
 
 "" shortcuts
-" ,cl = comment, ,ci = uncomment
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <F8> :TagbarToggle<CR>
+nnoremap <leader>f :e ++ff=dos<cr>:setlocal ff=unix<cr>
+cmap w!! w !sudo tee % >/dev/null
+
 nnoremap <leader>p :FZF<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>w :Windows<CR>
@@ -106,11 +113,12 @@ nnoremap <leader>w :Windows<CR>
 nnoremap <leader>vr :so $MYVIMRC<CR>
 nnoremap <leader>ve :tabe $MYVIMRC<CR>
 
-nnoremap <C-h> :tabprevious<CR>
-nnoremap <C-l> :tabnext<CR>
-nnoremap <leader>nt :tabnew<CR>
-nnoremap <leader>hs :split<CR>
-nnoremap <leader>vs :vsplit<CR>
+nmap <S-h>  <C-w>h
+nmap <S-l>  <C-w>l
+nmap <S-k>  <C-w>k
+nmap <S-j>  <C-w>j
+nnoremap <S-PageUp>    :bn<CR>
+nnoremap <S-PageDown>  :bp<CR>
 
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>ga :Gcommit --amend<CR>
@@ -126,4 +134,3 @@ augroup END
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
