@@ -5,8 +5,7 @@
 #
 
 # config
-WAN1=wlxf8d1115f0aa7
-WAN2=wlp4s2
+WAN=wlxf8d1115f0aa7
 NAT=enp3s0
 NETWORK=192.168.12.1/24
 
@@ -19,9 +18,7 @@ ip addr add $NETWORK dev $NAT
 sysctl net.ipv4.ip_forward=1
 
 # configure firewall
-iptables -A FORWARD -o $WAN1 -i $NAT -s $NETWORK -m conntrack --ctstate NEW -j ACCEPT
-iptables -A FORWARD -o $WAN2 -i $NAT -s $NETWORK -m conntrack --ctstate NEW -j ACCEPT
+iptables -A FORWARD -o $WAN -i $NAT -s $NETWORK -m conntrack --ctstate NEW -j ACCEPT
 iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -t nat -F POSTROUTING
-iptables -t nat -A POSTROUTING -o $WAN1 -j MASQUERADE
-iptables -t nat -A POSTROUTING -o $WAN2 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o $WAN -j MASQUERADE

@@ -1,0 +1,10 @@
+#!/bin/bash
+# Gustavo Paulo <gustavo.paulo.segura@gmail.com>
+# Fixes a corrupt .zsh_history file
+#
+# https://shapeshed.com/zsh-corrupt-history-file/
+
+mv ~/.zsh_history{,.bak}
+strings .zsh_history.bak > .zsh_history
+fc -R ~/.zsh_history
+rm ~/.zsh_history.bak

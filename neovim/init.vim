@@ -19,9 +19,11 @@ Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'dyng/ctrlsf.vim'
 
 """ styling
 Plug 'sjl/badwolf'
+Plug 'KeitaNakamura/neodark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
@@ -67,7 +69,7 @@ set guifont=Knack\ Nerd\ Font\ Regular\ 10
 set t_Co=256
 set background=dark
 set guioptions-=r
-colorscheme badwolf
+colorscheme neodark
 
 if (has("termguicolors"))
   set termguicolors
@@ -91,7 +93,7 @@ let g:syntastic_aggregate_errors = 1
 
 "" vim-airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme='badwolf'
+let g:airline_theme='neodark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_splits = 0
@@ -103,12 +105,14 @@ endif
 "" shortcuts
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <F8> :TagbarToggle<CR>
-nnoremap <leader>f :e ++ff=dos<cr>:setlocal ff=unix<cr>
+nnoremap <leader>d2u :e ++ff=dos<cr>:setlocal ff=unix<cr>
 cmap w!! w !sudo tee % >/dev/null
 
 nnoremap <leader>p :FZF<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>w :Windows<CR>
+
+nmap     <leader>f <Plug>CtrlSFPrompt
 
 nnoremap <leader>vr :so $MYVIMRC<CR>
 nnoremap <leader>ve :tabe $MYVIMRC<CR>

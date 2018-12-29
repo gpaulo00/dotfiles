@@ -7,16 +7,13 @@ merge = meld
 
 [extensions]
 hgext.bookmarks =
-prompt = /opt/src/hg-prompt/prompt.py
 color =
-hggit =
 fetch =
 pager =
 histedit =
 mq =
 rebase =
 shelve =
-hgsubversion = /opt/src/hgsubversion/hgsubversion
 purge =
 convert =
 

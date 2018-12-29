@@ -5,6 +5,7 @@
 #
 
 ## initializing
+export ZSH_DISABLE_COMPFIX=true
 export ZSH=/home/gpaulo00/.oh-my-zsh
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
@@ -16,8 +17,13 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="dd/mm/yyyy"
 
 # use powerlevel9k and some plugins
-plugins=(git systemadmin zsh-autosuggestions)
+plugins=(git rvm systemadmin zsh-autosuggestions)
 ZSH_THEME="powerlevel9k/powerlevel9k"
+
+# use simpler theme on tty
+if [ "$TERM" = "linux" ]; then
+  ZSH_THEME="fishy"
+fi
 
 ## configure powerlevel9k
 # fish-like path
@@ -47,19 +53,48 @@ source $ZSH/oh-my-zsh.sh
 
 ## my config
 export EDITOR=nvim
+export WINEARCH=win32
 alias vim=$EDITOR
 alias zshconfig="${EDITOR} ~/.zshrc"
 alias ohmyzsh="${EDITOR} ~/.oh-my-zsh"
 
-# programming languagues (Go, Java, JavaScript, Rust)
+## metasploit framework
+export MSFSOURCES="/opt"
+alias msfconsole="pushd $MSFSOURCES && ./msfconsole && popd"
+alias msfvenom="pushd $MSFSOURCES && ./msfvenom && popd"
+alias msfrpc="pushd $MSFSOURCES && ./msfrpc && popd"
+alias msfrpcd="pushd $MSFSOURCES && ./msfrpcd && popd"
+
+## fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# programming languagues
+## Go
 export GOPATH=$(go env GOPATH)
 export PATH=$PATH:/usr/lib/go-tip/bin:$GOPATH/bin
-export PATH=$PATH:$HOME/.cargo/bin
-export JAVA_HOME="/usr/lib/jvm/java-8-oracle/"
+export LGOPATH=/files/respaldos/.lgo
 
+## Rust
+# export PATH=$PATH:$HOME/.cargo/bin
+
+## Python
+export PATH="/home/gpaulo00/anaconda3/bin:$PATH"
+. ~/anaconda3/etc/profile.d/conda.sh
+export PYTHONPATH="$PYTHONPATH:/home/gpaulo00/anaconda3/lib/python3.6/site-packages"
+
+## JavaScript
 export NVM_DIR="$(realpath $HOME)/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+## PHP
+export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+
+## Java or JVM
+export JAVA_HOME="/usr/lib/jvm/java-8-oracle/"
+export SDKMAN_DIR="/home/gpaulo00/.sdkman"
+[[ -s "/home/gpaulo00/.sdkman/bin/sdkman-init.sh" ]] && source "/home/gpaulo00/.sdkman/bin/sdkman-init.sh"
+
+## Ruby
+export PATH="$PATH:$HOME/.rvm/bin"
