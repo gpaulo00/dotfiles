@@ -6,9 +6,9 @@
 
 ## initializing
 export ZSH_DISABLE_COMPFIX=true
-export ZSH=/home/gpaulo00/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-  source /etc/profile.d/vte.sh
+  source /etc/profile.d/vte*.sh
 fi
 
 # basic
@@ -70,17 +70,20 @@ alias msfrpcd="pushd $MSFSOURCES && ./msfrpcd && popd"
 
 # programming languagues
 ## Go
-export GOPATH=$(go env GOPATH)
-export PATH=$PATH:/usr/lib/go-tip/bin:$GOPATH/bin
-export LGOPATH=/files/respaldos/.lgo
+if [ -d "/usr/local/go" ]; then
+    export GOPATH=$(/usr/local/go/bin/go env GOPATH)
+    export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+fi
 
 ## Rust
 # export PATH=$PATH:$HOME/.cargo/bin
 
 ## Python
-export PATH="/home/gpaulo00/anaconda3/bin:$PATH"
-. ~/anaconda3/etc/profile.d/conda.sh
-export PYTHONPATH="$PYTHONPATH:/home/gpaulo00/anaconda3/lib/python3.6/site-packages"
+if [ -d "$HOME/anaconda3" ]; then
+    export PATH="$HOME/anaconda3/bin:$PATH"
+    . ~/anaconda3/etc/profile.d/conda.sh
+    export PYTHONPATH="$PYTHONPATH:$HOME/anaconda3/lib/python3.6/site-packages"
+fi
 
 ## JavaScript
 export NVM_DIR="$(realpath $HOME)/.nvm"
@@ -90,11 +93,3 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 ## PHP
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"
-
-## Java or JVM
-export JAVA_HOME="/usr/lib/jvm/java-8-oracle/"
-export SDKMAN_DIR="/home/gpaulo00/.sdkman"
-[[ -s "/home/gpaulo00/.sdkman/bin/sdkman-init.sh" ]] && source "/home/gpaulo00/.sdkman/bin/sdkman-init.sh"
-
-## Ruby
-export PATH="$PATH:$HOME/.rvm/bin"
